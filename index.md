@@ -1,6 +1,4 @@
-## I'm Tom Hall
-
-I develop software in Auckland, New Zealand.
+I'm Tom Hall, I develop software in Auckland, New Zealand.
 
 Below are a few of the things I've created over the years.
 
