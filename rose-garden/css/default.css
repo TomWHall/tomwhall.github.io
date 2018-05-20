@@ -1,0 +1,390 @@
+﻿html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: #00892c;
+	color: #000;
+	font-family: "Open Sans", sans-serif, Arial;
+	font-size: 20px;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+/* Layout */
+
+#left-column {
+	position: absolute;
+	width: 768px;
+	height: 768px;
+	background-color: #35221c;
+}
+
+#right-column {
+	position: absolute;
+	width: 416px;
+	height: 768px;
+	background-color: #fff;
+	background: url('../images/grass-bg.png');
+	background-position: right bottom;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#canvas-blocked, #canvas-growing {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+#canvas-blocked {
+	z-index: 2;
+}
+#canvas-growing {
+	z-index: 3;
+	cursor: crosshair;
+}
+
+#loading {
+	text-align: center;
+	margin-top: 1.5em;
+	font-size: 2em;
+}
+
+#game-info {
+	display: none;
+}
+
+
+/* Generic */
+
+ul, li {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style-type: none;
+}
+
+a {
+	font-family: Cambria;
+	color: #6d011c;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+	a:hover, a:active {
+		color: #f2003d;
+	}
+
+h1, h2 {
+	font-weight: bold;
+	margin: 0 0 0.25em;
+}
+
+h1 {
+	font-size: 1.8em;
+}
+
+h2 {
+	font-size: 1.4em;
+}
+
+
+/* Message text */
+
+#message {
+	position: absolute;
+	z-index: 3;
+	bottom: 0.75em;
+	width: 100%;
+	text-align: center;
+	color: #fff;
+	font-size: 1.2em;
+	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+}
+
+
+/* Flyouts */
+
+.flyout {
+	position: absolute;
+	z-index: 4;
+	left: 1em;
+	top: 1em;
+	right: 1em;
+	bottom: 1em;
+	background: #fff;
+	border: solid 2px #000;
+	border-radius: 1em;
+	overflow: hidden;
+	padding: 1em;
+}
+
+	.flyout h1 {
+		color: #cd0032;
+	}
+
+	.flyout button {
+		background-color: #00892c;
+		color: #fff;
+		border: solid 1px #007024;
+		border-radius: 10px;
+		padding: 0.5em;
+		margin-left: 1em;
+		min-width: 10em;
+		font-size: 1.25em;
+	}
+
+		.flyout button:active {
+			background-color: #007024;
+		}
+
+.buttons {
+	position: absolute;
+	bottom: 1em;
+	right: 1em;
+	width: 100%;
+	text-align: right;
+}
+
+
+/* Instructions flyout */
+
+#instructions-flyout li {
+	margin: 0.75em 0;
+}
+
+	#instructions-flyout li ul li {
+		margin-left: 1.5em;
+	}
+
+span.then {
+	font-style: italic;
+}
+
+
+/* Colour picker flyout */
+
+#colour-swatches {
+	width: 24em;
+	margin: 1em auto 0;
+}
+
+	#colour-swatches div {
+		width: 5em;
+		height: 5em;
+		float: left;
+		margin: 0.25em;
+		border: solid 0.25em #fff;
+		cursor: pointer;
+	}
+
+		#colour-swatches div.selected {
+			border-color: #000;
+		}
+
+
+/* Change level flyout */
+
+#change-level-flyout li {
+	font-size: 2em;
+	margin-bottom: 1em;
+}
+
+#change-level-flyout p {
+	font-size: 1.25em;
+}
+
+
+#new-game-flyout p, #exit-game-flyout p {
+	font-size: 2em;
+}
+
+
+/* Position */
+
+.marker {
+	stroke: #f9e427;
+	stroke-width: 2;
+}
+
+
+/* Flower */
+
+.flower {
+	stroke: #000;
+	stroke-width: 1;
+}
+
+.flower-leaf {
+	fill: #016e24;
+}
+
+.flower-petal-outer {
+	stroke-width: 3;
+}
+
+.flower-petal-inner {
+	stroke-width: 2;
+}
+
+.flower-stigma {
+	fill: #f9e427;
+	stroke-linecap: round;
+}
+
+
+/* Level */
+
+#level {
+	position: absolute;
+	top: 0.4em;
+	width: 100%;
+	font-size: 1.7em;
+	text-align: center;
+}
+
+
+/* Statistics bars */
+
+.stats-bar {
+	position: absolute;
+	top: 6em;
+	width: 1.5em;
+	height: 30em;
+	background-color: #eee;
+	background: linear-gradient(to left, #fbddd1, #eeeeee);
+	border: solid 0.2em #000;
+	border-radius: 0.5em;
+}
+
+	.stats-bar div {
+		position: absolute;
+		width: 100%;
+		height: 0;
+	}
+
+
+/* Day bar */
+
+#day-bar {
+	left: 1.25em;
+}
+
+#day-bar-inner {
+	bottom: 0;
+	border-bottom-left-radius: 0.3em;
+	border-bottom-right-radius: 0.3em;
+	border-top: solid 1px #000;
+	background-color: #f9e427;
+	background: linear-gradient(to bottom, #f9e427, #998c18);
+}
+
+	#day-bar-inner.game-over {
+		border: none;
+		border-radius: 0.3em;
+	}
+
+
+/* Percentage bar */
+
+#percentage-bar {
+	left: 4.25em;
+}
+
+#percentage-bar-flowers {
+	bottom: 0;
+	border-bottom-left-radius: 0.3em;
+	border-bottom-right-radius: 0.3em;
+	border-top: solid 1px #000;
+}
+
+#percentage-bar-weeds {
+	border-top-left-radius: 0.3em;
+	border-top-right-radius: 0.3em;
+	border-bottom: solid 1px #000;
+	background-color: #00892c;
+	background: linear-gradient(to bottom, #004516, #00892c);
+}
+
+
+/* Statistics */
+
+#statistics {
+	position: absolute;
+	left: 7em;
+	top: 21em;
+	width: 12em;
+	text-align: center;
+}
+
+	#statistics li {
+		font-size: 1.6em;
+		line-height: 1.2em;
+		margin-bottom: 1.2em;
+	}
+
+.statistics-medium {
+	font-size: 1.75em;
+}
+
+.statistics-large {
+	font-size: 2.25em;
+}
+
+#percentage-text-weeds {
+	color: #00892c;
+}
+
+
+/* Options */
+
+#options {
+	position: absolute;
+	left: 7em;
+	top: 6em;
+	width: 16em;
+}
+
+	#options li {
+		float: left;
+		margin: 0 1.3em 1.3em 0;
+	}
+
+		#options li div {
+			width: 5.5em;
+			height: 5.5em;
+			background-repeat: no-repeat;
+			background-size: cover;
+			cursor: pointer;
+		}
+
+#new-game-button {
+	background: url('../images/traffic-light.png');
+}
+
+#instructions-button {
+	background: url('../images/question-mark.png');
+}
+
+#colour-picker-button {
+	background: url('../images/colours.png');
+}
+
+#free-spots-button {
+	background: url('../images/target.png');
+}
+
+#toggle-sound-button {
+	background: url('../images/bird.png');
+}
+
+	#toggle-sound-button.off {
+		height: 5.5em;
+		background: url('../images/bird-off.png');
+		background-repeat: no-repeat;
+		background-size: contain;
+	}

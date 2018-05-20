@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>I Never Promised You a Rose Garden</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width" />	
+  <meta name="description" content="A garden-themed game for all ages">
+  <meta name="keywords" content="game, flowers, garden, HTML5, JavaScript, canvas, New Zealand">
+
+	<link href="css/normalize.css" rel="stylesheet" />
+	<link href="css/default.css" rel="stylesheet" />
+
+  <script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-48564653-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+<body>
+	<div id="left-column">
+		<canvas id="canvas-blocked" width="768" height="768"></canvas>
+		<canvas id="canvas-growing" width="768" height="768" data-bind="tap: gardenTapped"></canvas>
+		<div id="message" data-bind="html: message"></div>
+
+		<div id="instructions-flyout" class="flyout" data-bind="visible: instructionsFlyoutVisible" style="display: none">
+			<h1>dig the dirt on how to play</h1>
+			<p>You have one month to fill the garden with fragrant flowers while I attempt to wither you with my weeds!</p>
+			<ul>
+				<li>On each day:
+				<ul>
+					<li>You can <i>either</i> plant a flower <i>or</i> pull up a weed, <i>if</i> you didn&apos;t pull up a weed on your last turn.</li>
+					<li><i>Then</i> I plant a weed. I can&apos;t plant a weed back in the same spot you just pulled it up from, but on my next turn I can plant there again.</li>
+					<li><i>Then</i> the sun shines and all of the flowers and weeds grow by 1 square, if they have space.</li>
+				</ul>
+				</li>
+				<li>If a flower is touched by 3 of my weeds, the flower withers and disappears! When a flower is touched by 2 weeds, it turns dark so you know that it&apos;s in danger.</li>
+				<li>The game ends either when every spot to plant in is full, or at the end of the 31st day of the month. The winner is the one with the most flower or weed coverage.</li>
+				<li>You can change the level by clicking on the level name.</li>
+			</ul>
+
+			<div class="buttons">
+				<button data-bind="tap: toggleInstructionsFlyout">OK</button>
+			</div>
+		</div>
+
+		<div id="change-level-flyout" class="flyout" data-bind="visible: changeLevelFlyoutVisible" style="display: none">
+			<h1>level planting field</h1>
+			<p>Changing the difficulty level will start a new game.</p>
+			<ul>
+				<li>
+					<a data-bind="tap: function() { changeLevel(Level.Easy) }">Botany for Beginners</a>
+				</li>
+				<li>
+					<a data-bind="tap: function() { changeLevel(Level.Medium) }">Medium Mulch</a>
+				</li>
+				<li>
+					<a data-bind="tap: function() { changeLevel(Level.Hard) }">Heavyweight Horticulture</a>
+				</li>
+			</ul>
+			<div class="buttons">
+				<button data-bind="tap: toggleChangeLevelFlyout">Cancel</button>
+			</div>
+		</div>
+
+		<div id="new-game-flyout" class="flyout" data-bind="visible: newGameFlyoutVisible" style="display: none">
+			<h1>plough on</h1>
+			<p>Start a new game?</p>
+
+			<div class="buttons">
+				<button data-bind="tap: confirmNewGame">Yes</button>
+				<button data-bind="tap: toggleNewGameFlyout">Cancel</button>
+			</div>
+		</div>
+
+		<div id="colour-picker-flyout" class="flyout" data-bind="visible: colourPickerFlyoutVisible" style="display: none">
+			<h1>grow your true colours</h1>
+
+			<div id="colour-swatches" data-bind="foreach: availableColours">
+				<div data-bind="style: { 'background': $data }, css: { 'selected': Flowers.game.isColourSelected($data) }, tap: Flowers.game.selectFlowerColour"></div>
+			</div>
+
+			<div class="buttons">
+				<button data-bind="tap: resetDefaultFlowerColour">Reset</button>
+				<button data-bind="tap: toggleColourPickerFlyout">OK</button>
+			</div>
+		</div>
+	</div>
+
+	<div id="right-column">
+		<div id="loading">Loading...</div>
+
+		<div id="game-info">
+			<a id="level" data-bind="tap: toggleChangeLevelFlyout, html: '<strong>Level:</strong><br>' + levelDisplay()" title="Change level"></a>
+
+			<div id="day-bar" class="stats-bar">
+				<div id="day-bar-inner" data-bind="style: { height: dayPercentageDisplay() + '%' }, css: { 'game-over': (isGameOver() && isLastDay()) }"></div>
+			</div>
+
+			<div id="percentage-bar" class="stats-bar">
+				<div id="percentage-bar-flowers" data-bind="style: { height: flowerCoverageDisplay() + '%', 'background-color': flowerColourOuter(), background: 'linear-gradient(to bottom, ' + flowerColourOuter() + ', ' + flowerColourCenter() + ')' }"></div>
+				<div id="percentage-bar-weeds" data-bind="style: { height: weedCoverageDisplay() + '%' }"></div>
+			</div>
+
+			<ul id="statistics">
+				<li>Day <span data-bind="text: day" class="statistics-medium"></span> of 31</li>
+				<li id="percentage-text-flowers" data-bind="style: { color: flowerColourOuter() }"><span data-bind="html: flowerCoverageDisplay() + '%'" class="statistics-large outline"></span><br>flowers</li>
+				<li id="percentage-text-weeds"><span data-bind="html: weedCoverageDisplay() + '%'" class="statistics-large outline"></span><br>weeds</li>
+			</ul>
+
+			<ul id="options">
+				<li>
+					<div id="new-game-button" data-bind="tap: requestNewGame" title="New game"></div>
+				</li>
+				<li>
+					<div id="instructions-button" data-bind="tap: toggleInstructionsFlyout" title="Instructions"></div>
+				</li>
+				<li>
+					<div id="colour-picker-button" data-bind="tap: toggleColourPickerFlyout" title="Colours"></div>
+				</li>
+				<li>
+					<div id="toggle-sound-button" data-bind="tap: toggleSound, css: { off: !soundOn() }" title="Toggle sound"></div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/hammer.js/1.0.10/hammer.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/SoundJS/0.5.2/soundjs.min.js"></script>
+
+	<script src="js/RoseGarden.min.js"></script>
+</body>
+</html>
