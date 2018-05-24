@@ -6,7 +6,7 @@ Below are a few of the things I've created over the years.
 
 A 2D platformer demo using React, Redux, and SVG.
 
-[Play online](./ReactReduxSVG)
+[GitHub repo](https://github.com/TomWHall/ReactReduxSVG) / [Play online](./ReactReduxSVG)
 
 ### Descensus 2
 
