@@ -2,17 +2,17 @@ I'm Tom Hall, I develop software in Auckland, New Zealand.
 
 Below are a few of the things I've created over the years.
 
+### SVG React platformer
+
+A PoC of a retro 2D platform game using SVG, React, and dynamic JavaScript modules
+
+[GitHub repo](https://github.com/TomWHall/svg-react-platformer) / [Play online](./svg-react-platformer)
+
 ### p2BabylonUnicycle
 
 A 2.5D unicycle platform game demo combining p2.js and Babylon.js.
 
 [GitHub repo](https://github.com/TomWHall/p2BabylonUnicycle) / [Play online](./p2BabylonUnicycle)
-
-### ReactReduxSVG
-
-A 2D platformer demo using React, Redux, and SVG.
-
-[GitHub repo](https://github.com/TomWHall/ReactReduxSVG) / [Play online](./ReactReduxSVG)
 
 ### Descensus 2
 
