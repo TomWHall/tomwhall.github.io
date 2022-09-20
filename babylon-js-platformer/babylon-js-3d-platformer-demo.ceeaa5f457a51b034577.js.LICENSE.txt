@@ -1,0 +1,4 @@
+/*!
+ * babylon-js-3d-platformer-demo v0.0.1
+ * Copyright (c) Tom W Hall 2022
+ */
