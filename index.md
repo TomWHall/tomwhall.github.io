@@ -2,6 +2,12 @@ I'm Tom Hall, I develop software in Auckland, New Zealand.
 
 Below are a few of the things I've created over the years.
 
+### Babylon.js 3D platformer
+
+A film noir themed experiment with Babylon.js
+
+[Play online](./babylon-js-platformer)
+
 ### SVG React platformer
 
 A PoC of a retro 2D platform game using SVG, React, and dynamic JavaScript modules
