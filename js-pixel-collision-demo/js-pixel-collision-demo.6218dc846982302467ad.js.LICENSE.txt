@@ -1,0 +1,4 @@
+/*!
+ * js-pixel-collision-demo v1.0.0
+ * Copyright (c) Tom W Hall 2022
+ */
