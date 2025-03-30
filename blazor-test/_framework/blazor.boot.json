@@ -1,11 +1,11 @@
 {
   "mainAssemblyName": "Bop.BlazorTest",
   "resources": {
-    "hash": "sha256-9aK4T9b2VgXjRIMyu9rHz84ztxqc4TfCMcs7/HxXz3s=",
+    "hash": "sha256-boLfXBk4+ONOm3d81McT7X2o3w/4IXXoXDHArlYZDJE=",
     "fingerprinting": {
       "Aether.Physics2D.sgw1zrxqa8.wasm": "Aether.Physics2D.wasm",
-      "Bop.BlazorTest.wytf6yfcma.wasm": "Bop.BlazorTest.wasm",
-      "Microsoft.AspNetCore.Components.1n8r89xkoi.wasm": "Microsoft.AspNetCore.Components.wasm",
+      "Bop.BlazorTest.wj0hldnb1v.wasm": "Bop.BlazorTest.wasm",
+      "Microsoft.AspNetCore.Components.9465047m51.wasm": "Microsoft.AspNetCore.Components.wasm",
       "Microsoft.AspNetCore.Components.Web.7yvofxhswa.wasm": "Microsoft.AspNetCore.Components.Web.wasm",
       "Microsoft.AspNetCore.Components.WebAssembly.my7i0fjxy3.wasm": "Microsoft.AspNetCore.Components.WebAssembly.wasm",
       "Microsoft.Extensions.Configuration.Abstractions.f9jq6u05xu.wasm": "Microsoft.Extensions.Configuration.Abstractions.wasm",
@@ -76,8 +76,8 @@
     },
     "assembly": {
       "Aether.Physics2D.sgw1zrxqa8.wasm": "sha256-ZMbwkUNn2yX6kvtB5Cpv6MdQ4sCSOquxMULOxWatUbk=",
-      "Bop.BlazorTest.wytf6yfcma.wasm": "sha256-eMMZXz6sDaAzmZgCrb4S85mSO+TU3KD8M8RnZiureo4=",
-      "Microsoft.AspNetCore.Components.1n8r89xkoi.wasm": "sha256-fUC+Ahyg11NDCSYSTk6P510gVPTnk39MheeI1ld3iEw=",
+      "Bop.BlazorTest.wj0hldnb1v.wasm": "sha256-9CkL5c5Rttums5FBVIu9JjDdW+ceYzLJcMsSiQ3pnX8=",
+      "Microsoft.AspNetCore.Components.9465047m51.wasm": "sha256-x9HVhkWyPnHSJntdu8kRybPY0NA2DUoekdySlZBNphM=",
       "Microsoft.AspNetCore.Components.Web.7yvofxhswa.wasm": "sha256-QaU3MCJZXUPpTg3z+sdNujuTSOqUW4O70/Rc6aQj1xU=",
       "Microsoft.AspNetCore.Components.WebAssembly.my7i0fjxy3.wasm": "sha256-MvswB7fyuI2Rnzd53sEFAKe9KEYFFYCE+0qKlOFArfw=",
       "Microsoft.Extensions.Configuration.Abstractions.f9jq6u05xu.wasm": "sha256-AyL87FvJMf14Dcn8HeQ3n2veg/RQGVGCjfpJPt1RQC4=",
